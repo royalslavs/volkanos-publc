@@ -1,0 +1,16 @@
+services:
+  emulator:
+    environment:
+      EMULATOR_DEVICE_PROFILE: "tv"
+      EMULATOR_RAM_SIZE_MB: "6144"
+      EMULATOR_X_SCREEN_SIZE: "1920x1080x24"
+      EMULATOR_X_CAPTURE_SIZE: "1920x1080"
+  frontend:
+    build: {context: ./VOLKANOS}
+    image: volkanos-frontend:latest
+    ports: ["18080:80"]
+    depends_on: [apkbridge]
+  apkbridge:
+    environment:
+      EMULATOR_DEVICE_PROFILE: "tv"
+      ADB_INSTALL_ABI: "auto"
